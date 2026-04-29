@@ -234,7 +234,7 @@ window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.cli
 // ── Draw the logo + text into an offscreen canvas, sample dots from it ──
 function buildSampler() {
   const off = document.createElement('canvas');
-  const oW = Math.min(W, 900), oH = Math.min(H, 700);
+  const oW = Math.min(W, 1200), oH = Math.min(H, 900);
   off.width = oW; off.height = oH;
   const oc = off.getContext('2d');
 
@@ -243,7 +243,7 @@ function buildSampler() {
   oc.fillRect(0, 0, oW, oH);
 
   // Draw the rocket SVG as a large bright shape
-  const cx = oW / 2, cy = oH * 0.38;
+  const cx = oW / 2, cy = oH * 0.30;
 
   // Body glow — rotated 45° clockwise around rocket centre
   oc.save();
@@ -255,7 +255,7 @@ function buildSampler() {
 
   // Rocket body path
   oc.beginPath();
-  const scale = oW * 0.18;
+  const scale = oW * 0.22;
   oc.moveTo(cx, cy - scale * 0.75);
   oc.bezierCurveTo(cx - scale * 0.5, cy - scale * 0.1,
                    cx - scale * 0.55, cy + scale * 0.6,
@@ -298,12 +298,12 @@ function buildSampler() {
   // Text below
   const textY = cy + scale * 1.6;
   oc.fillStyle = 'rgba(255,255,255,0.9)';
-  oc.font = `bold ${oW * 0.085}px 'Bebas Neue', serif`;
+  oc.font = `bold ${oW * 0.1}px 'Bebas Neue', serif`;
   oc.textAlign = 'center';
   oc.fillText('HYPER', cx, textY);
 
   oc.fillStyle = 'rgba(255,255,255,0.75)';
-  oc.font = `${oW * 0.048}px 'Bebas Neue', serif`;
+  oc.font = `${oW * 0.06}px 'Bebas Neue', serif`;
   oc.fillText('MEDIA PRODUCTION', cx, textY + oW * 0.065);
 
   return { off, oW, oH };
