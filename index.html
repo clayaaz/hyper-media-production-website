@@ -92,12 +92,7 @@ function buildSampler() {
       oc.fillStyle = 'rgba(255,255,255,0.9)';
       oc.font = `bold ${oW * 0.13}px 'Bebas Neue', serif`;
       oc.textAlign = 'center';
-      oc.fillText('HYPER', oW / 2, textY);
-
-      oc.fillStyle = 'rgba(255,255,255,0.7)';
-      oc.font = `${oW * 0.068}px 'Bebas Neue', serif`;
-      oc.fillText('MEDIA PRODUCTION', oW / 2, textY + oW * 0.095);
-
+      oc.fillText('HYPER MEDIA PRODUCTION', oW / 2, textY);
       resolve({ off, oW, oH });
     };
     img.src = LOGO_B64;
