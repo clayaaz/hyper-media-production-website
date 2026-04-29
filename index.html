@@ -87,7 +87,7 @@ function buildSampler() {
       const ly = oH * 0.06;
       oc.drawImage(img, lx, ly, logoSize, logoSize);
       
-      const textY = ly + logoSize + oW * 0.13;
+      const textY = (ly + logoSize + oW * 0.13) - 125;
 
       const padding = oW * 0.03; // smaller padding → allows bigger text
       let fontSize = oW * 0.18;  // start MUCH bigger
@@ -130,7 +130,7 @@ async function initParticles() {
           y:  ty + (Math.random() - 0.5) * H * 0.6,
           tx, ty,
           size: Math.random() * 1.8 + 0.2,
-          alpha: (brightness / 255) * (Math.random() * 0.8 + 0.5),
+          alpha: (brightness / 255) * (Math.random() * 0.5 + 0.3),
           speed: Math.random() * 0.03 + 0.01,
           twinkle: Math.random() * Math.PI * 2,
           twinkleSpeed: Math.random() * 0.04 + 0.01,
@@ -142,37 +142,82 @@ async function initParticles() {
 }
 
 let animating = false;
-let stars = [];
+let starLayers = [];
 
 function initStars() {
-  stars = [];
-  const count = Math.floor((W * H) / 1800); // density relative to screen size
-  for (let i = 0; i < count; i++) {
-    stars.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      size: Math.random() * 1.0 + 0.1,
-      alpha: Math.random() * 0.5 + 0.05,
-      twinkle: Math.random() * Math.PI * 2,
-      twinkleSpeed: Math.random() * 0.008 + 0.002,
-    });
+  starLayers = [];
+
+  const layerConfigs = [
+    { density: 3200, size: [0.2, 0.8], alpha: [0.05, 0.25] },
+    { density: 3000, size: [0.4, 1.2], alpha: [0.1, 0.5] },
+    { density: 3000, size: [0.6, 1.8], alpha: [0.2, 0.9] }
+  ];
+
+  for (const layer of layerConfigs) {
+    const stars = [];
+    const count = Math.floor((W * H) / layer.density);
+
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 0.12 + 0.03;
+
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+
+        size: Math.random() * (layer.size[1] - layer.size[0]) + layer.size[0],
+        alpha: Math.random() * (layer.alpha[1] - layer.alpha[0]) + layer.alpha[0],
+
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: Math.random() * 0.02 + 0.005
+      });
+    }
+
+    starLayers.push(stars);
   }
 }
+
 
 function animate() {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, W, H);
 
-  // Draw background stars first
-  for (const s of stars) {
-    s.twinkle += s.twinkleSpeed;
-    const tw = Math.sin(s.twinkle) * 0.4 + 0.6;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${s.alpha * tw})`;
-    ctx.fill();
-  }
+  for (const layer of starLayers) {
+    for (const s of layer) {
+      // 🌠 drift
+      s.x += s.vx;
+      s.y += s.vy;
 
+      // soft randomness (organic motion)
+      s.vx += (Math.random() - 0.5) * 0.0015;
+      s.vy += (Math.random() - 0.5) * 0.0015;
+
+      // damping (prevents chaos)
+      s.vx *= 0.995;
+      s.vy *= 0.995;
+
+      // wrap screen
+      if (s.x < 0) s.x = W;
+      if (s.x > W) s.x = 0;
+      if (s.y < 0) s.y = H;
+      if (s.y > H) s.y = 0;
+
+      // ✨ twinkle
+      s.twinkle += s.twinkleSpeed;
+      const pulse = Math.sin(s.twinkle) * 0.5 + 0.5;
+
+      const size = s.size * (0.6 + pulse * 0.8);
+      const alpha = s.alpha * (0.4 + pulse * 1.2);
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    }
+  }
   // Draw logo/text particles on top
   for (const p of particles) {
     p.x += (p.tx - p.x) * p.speed *5 ;
@@ -184,7 +229,7 @@ function animate() {
       p.x += (dx / dist) * force;
       p.y += (dy / dist) * force;
     }
-    p.twinkle += p.twinkleSpeed;
+    p.twinkle += p.twinkleSpeed * 2;
     const tw = Math.sin(p.twinkle) * 0.35 + 0.65;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
