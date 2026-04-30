@@ -96,7 +96,7 @@ function buildSampler() {
       oc.fillStyle = 'rgba(255,255,255,1)';
 
       do {
-        oc.font = `bold ${fontSize}px 'Bebas Neue', serif`;
+        oc.font = `${fontSize}px 'Bebas Neue', serif`;
         var textWidth = oc.measureText('HYPER MEDIA PRODUCTION').width;
         fontSize -= 2;
       } while (textWidth > (oW - padding * 2));
