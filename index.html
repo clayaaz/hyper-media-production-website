@@ -221,6 +221,190 @@
     width: 52px;
     background: var(--white-90);
   }
+/* ── BTS SECTION ── */
+#bts-section {
+  padding: 100px 80px 0;
+  border-top: 1px solid var(--white-10);
+  overflow: hidden;
+}
+
+#bts-section .section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 40px;
+}
+
+#bts-section .section-header-left {
+  flex: 0 0 auto;
+}
+
+#bts-section .section-tagline {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  line-height: 1.9;
+  color: var(--white-30);
+  max-width: 340px;
+  text-align: right;
+  font-weight: 300;
+}
+
+.bts-holder {
+  width: 100vw;
+  margin-left: -80px;
+  line-height: 0;
+  border-top: 1px solid var(--white-10);
+}
+
+.bts-holder img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.88);
+}
+/* ═══════════════════════════════════════
+   MOBILE OPTIMISATION  ≤ 768px
+   ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Nav ── */
+  nav {
+    padding: 18px 24px;
+  }
+
+  /* ── Global section padding ── */
+  section {
+    padding: 72px 24px;
+  }
+
+  /* ── Section typography ── */
+  .section-label {
+    font-size: 0.6rem;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+    margin-bottom: 24px;
+  }
+
+  /* ── OUR WORK ── */
+  #our-work {
+    padding: 72px 24px 100px;
+  }
+
+  /* Stack header: title top, tagline below */
+  #our-work .section-header,
+  #bts-section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  #our-work .section-tagline,
+  #bts-section .section-tagline {
+    text-align: left;
+    max-width: 100%;
+    font-size: 0.7rem;
+    line-height: 1.7;
+  }
+
+  /* ── Carousel ── */
+  .carousel-track {
+    height: clamp(220px, 62vw, 340px);
+  }
+
+  .carousel-slide {
+    width: 92vw;
+  }
+
+  /* Tighten side-card peek on mobile */
+  .carousel-slide.is-next {
+    opacity: 0.2;
+    filter: brightness(0.3) blur(2px);
+  }
+  .carousel-slide.is-prev {
+    opacity: 0.2;
+    filter: brightness(0.3) blur(2px);
+  }
+
+  /* Move arrow inside the frame on mobile */
+  .carousel-arrow {
+    right: 4px;
+    width: 42px;
+    height: 42px;
+  }
+  .carousel-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .slide-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-top: 12px;
+    margin-top: 10px;
+  }
+
+  .carousel-dots {
+    margin-top: 24px;
+  }
+
+  /* ── BTS section ── */
+  #bts-section {
+    padding: 72px 24px 0;
+  }
+
+  /* Full-bleed image: cancel 24px padding on both sides */
+  .bts-holder {
+    margin-left: -24px;
+    width: 100vw;
+  }
+
+  /* Give the BTS image a cinematic fixed height on mobile */
+  .bts-holder img {
+    height: 56vw;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 36px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .carousel-arrow {
+    right: 4px;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+  .carousel-track {
+    height: clamp(190px, 68vw, 280px);
+  }
+  .carousel-arrow {
+    right: 2px;
+    width: 36px;
+    height: 36px;
+  }
+}
 
   /* Fade-in on scroll */
   .reveal {
@@ -303,6 +487,27 @@
           <span class="slide-meta-index">02 — 2026</span>
         </div>
       </div>
+       <!-- Slide 3 -->
+      <div class="carousel-slide is-next" data-index="2">
+        <div class="slide-inner">
+          <span class="bracket bracket--tl"></span>
+          <span class="bracket bracket--tr"></span>
+          <span class="bracket bracket--bl"></span>
+          <span class="bracket bracket--br"></span>
+          <div class="video-ratio">
+            <iframe
+              src="https://www.youtube.com/embed/llGaKR3AW1s?rel=0&modestbranding=1&color=white"
+              title="HMP — Feature 2026"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="slide-meta">
+          <span class="slide-meta-label">Hyper Media Production &nbsp;/&nbsp; Showreel</span>
+          <span class="slide-meta-index">02 — 2026</span>
+        </div>
+      </div>
 
     </div><!-- /track -->
 
@@ -312,10 +517,27 @@
     </button>
 
     <!-- Dots -->
-    <div class="carousel-dots" id="carouselDots">
-      <div class="dot active" data-goto="0"></div>
-      <div class="dot"        data-goto="1"></div>
+  <div class="carousel-dots" id="carouselDots">
+    <div class="dot active" data-goto="0"></div>
+    <div class="dot"        data-goto="1"></div>
+    <div class="dot"        data-goto="2"></div>
+  </div>
+</section>
+<!-- ── BTS WORK ── -->
+<section id="bts-section">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <p class="section-label">Behind The Scenes</p>
+      <h2 class="section-title">BTS</h2>
     </div>
+    <p class="section-tagline">
+      The hard work<br>
+      Behind every frame
+    </p>
+  </div>
+
+  <div class="bts-holder reveal" style="transition-delay:0.15s;">
+    <img src="assets/bts.png" alt="Behind the scenes">
   </div>
 </section>
 
@@ -357,31 +579,62 @@ function buildSampler() {
       off.width = oW; off.height = oH;
       const oc = off.getContext('2d');
 
-      // Black background
+      const isMobile = W < 768;
+
       oc.fillStyle = '#000';
       oc.fillRect(0, 0, oW, oH);
 
-      // Draw logo centred in upper portion, large
-      const logoSize = Math.min(oW, oH) * 0.72;
-      const lx = (oW - logoSize) / 2;
-      const ly = oH * 0.06;
-      oc.drawImage(img, lx, ly, logoSize, logoSize);
-      
-      const textY = (ly + logoSize + oW * 0.13) - 125;
+      if (isMobile) {
+        // ── MOBILE: large logo + two stacked lines ──
+        const logoSize = Math.min(oW, oH) * 0.82;
+        const lx = (oW - logoSize) / 2;
+        const ly = oH * 0.05;
+        oc.drawImage(img, lx, ly, logoSize, logoSize);
 
-      const padding = oW * 0.03;
-      let fontSize = oW * 0.18;
+        const lines = ['HYPER', 'MEDIA', 'PRODUCTION'];
+        const padding = oW * 0.06;
+        let fontSize = oW * 0.34;
 
-      oc.textAlign = 'center';
-      oc.fillStyle = 'rgba(255,255,255,1)';
+        // Shrink until the longest line fits
+        do {
+          oc.font = `${fontSize}px 'Bebas Neue', serif`;
+          const maxW = Math.max(...lines.map(l => oc.measureText(l).width));
+          if (maxW <= oW - padding * 2) break;
+          fontSize -= 1;
+        } while (fontSize > 8);
 
-      do {
-        oc.font = `${fontSize}px 'Bebas Neue', serif`;
-        var textWidth = oc.measureText('HYPER MEDIA PRODUCTION').width;
-        fontSize -= 2;
-      } while (textWidth > (oW - padding * 2));
+        oc.textAlign = 'center';
+        oc.fillStyle = 'rgba(255,255,255,1)';
 
-      oc.fillText('HYPER MEDIA PRODUCTION', oW / 2, textY);
+        const lineHeight = fontSize * 1.15;
+        const textBlockTop = ly + logoSize + 20;
+
+        lines.forEach((line, i) => {
+          oc.fillText(line, oW / 2, textBlockTop + fontSize + i * lineHeight);
+        });
+
+      } else {
+        // ── DESKTOP: original layout untouched ──
+        const logoSize = Math.min(oW, oH) * 0.72;
+        const lx = (oW - logoSize) / 2;
+        const ly = oH * 0.06;
+        oc.drawImage(img, lx, ly, logoSize, logoSize);
+
+        const textY = (ly + logoSize + oW * 0.13) - 125;
+        const padding = oW * 0.03;
+        let fontSize = oW * 0.18;
+
+        oc.textAlign = 'center';
+        oc.fillStyle = 'rgba(255,255,255,1)';
+
+        do {
+          oc.font = `${fontSize}px 'Bebas Neue', serif`;
+          var textWidth = oc.measureText('HYPER MEDIA PRODUCTION').width;
+          fontSize -= 2;
+        } while (textWidth > (oW - padding * 2));
+
+        oc.fillText('HYPER MEDIA PRODUCTION', oW / 2, textY);
+      }
 
       resolve({ off, oW, oH });
     };
